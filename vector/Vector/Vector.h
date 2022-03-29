@@ -11,11 +11,14 @@ public:
 
 	void resize(int newSize);
 	void print();
+	void print(int i);
 	int getSize();
+	double getValue(int i);
+
 
 	Vector operator=(const Vector& v) const;
-	/*
 	Vector operator+(const Vector& v) const;
+	/*
 	Vector operator-(const Vector& v) const;
 	Vector& operator+=(const Vector& v);
 	Vector& operator-=(const Vector& v);

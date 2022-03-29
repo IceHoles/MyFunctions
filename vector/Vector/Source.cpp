@@ -9,8 +9,10 @@ int main() {
 	a[0] = 1.;
 	b[1] = 2.;
 
-	b += a;
+	c = b + a;
+	a.print();
 	b.print();
+	c.print();
 
+	return 0;
 }
-

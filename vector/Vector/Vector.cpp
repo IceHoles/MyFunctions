@@ -14,7 +14,6 @@ Vector::Vector(int n)
 		data[i] = 0.0;
 }
 
-
 Vector::~Vector() {
 	delete[]data;
 	data = 0;
@@ -25,12 +24,21 @@ int Vector::getSize() {
 	return n;
 }
 
+double Vector::getValue(int i) {
+	return data[i];
+}
+
 void Vector::print()
 {
 	for (int i = 0; i < n; i++) {
 		std::cout << data[i] << " ";
 	}
 	std::cout << std::endl;
+}
+
+void Vector::print(int i)
+{
+	std::cout << data[i] << std::endl;
 }
 
 void Vector::resize(int newSize)
@@ -48,10 +56,14 @@ Vector Vector::operator=(const Vector& v) const {
 	return *this;
 }
 
-/*
-Vector Vector::operator+(const Vector& v) const {
 
+Vector Vector::operator+(const Vector& v) const
+{
+	for (int i = 0; i < n; i++)
+		data[i] = data[i] + v[i];
+	return *this;
 }
+/*
 Vector Vector::operator-(const Vector& v) const {
 
 }
