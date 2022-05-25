@@ -28,6 +28,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& out, const Matrice& m);
 	friend std::istream& operator>>(std::istream& in, const Matrice& m);
 
+	void popBack();
 	void swapLines(int a, int b);
 	void printM();
 	int getLines() const;

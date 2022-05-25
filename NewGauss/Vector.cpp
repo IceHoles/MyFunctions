@@ -185,14 +185,28 @@ void Vector::print(int i)
 	std::cout << data[i] << std::endl;
 }
 
-int Vector::isNull()
+bool Vector::isNull()
 {
 	int ans = 1;
 	for (int i = 0; i < this->n; i++) {
-		if (this->data[i] != 0)
+		if (abs(this->data[i]) < 1e-6)
 			ans = 0;
 	}
 	return ans;
+}
+
+bool Vector::isConjoint()
+{
+	bool a = 0;
+	for (int i = 0; i < this->n - 1; i++) {
+		if (this->data[i] != 0) {
+			a = 1;
+		}
+	}
+	if (this->data[this->n] != 0 && a) {
+		return true;
+	}
+	return false;
 }
 
 double& Vector::operator[](int i) 

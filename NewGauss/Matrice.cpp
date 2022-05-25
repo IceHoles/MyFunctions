@@ -140,6 +140,10 @@ Matrice Matrice::operator*(const Matrice& m)
 	}
 }
 
+void Matrice::popBack(){
+	this->l = this->l - 1;
+}
+
 void Matrice::swapLines(int a, int b) {
 	Vector tmp = this->data[a];
 	this->data[a] = this->data[b];

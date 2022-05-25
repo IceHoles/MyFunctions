@@ -5,10 +5,7 @@
 #include "Matrice.h"
 
 class GaussSolver {
-private:
-	std::vector<Vector> a;
 public:
-	GaussSolver();
 	std::vector<Vector> solve(const Matrice& A, const Vector& b);
 
 };

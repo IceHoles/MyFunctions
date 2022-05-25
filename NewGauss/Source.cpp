@@ -61,7 +61,7 @@ int matrice_test() {
 int main() {
 	//matrice_test();
 	
-	int m = 3;
+	int m = 4;
 	int n = 3;
 	
 	Matrice A(m, n);
@@ -72,9 +72,9 @@ int main() {
 	}
 	A.printM();
 
-	Vector b(n);
+	Vector b(m);
 	
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < m; i++) {
 		std::cin >> b[i];
 	}
 	b.print();

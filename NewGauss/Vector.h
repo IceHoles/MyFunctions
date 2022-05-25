@@ -29,7 +29,8 @@ public:
 	int getSize() const;
 	void print();
 	void print(int i);
-	int isNull();
+	bool isNull();
+	bool isConjoint();
 	
 	double& operator[](int i);
 	double operator[](int i) const;
