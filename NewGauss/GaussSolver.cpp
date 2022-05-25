@@ -9,28 +9,26 @@
 std::vector<Vector> GaussSolver::solve(const Matrice& M, const Vector& v) {
     std::vector<Vector> a;
     a.reserve(1);
-    int l = M.getLines();
-    int c = M.getColumns();
     double eps = 1e-6;
 
-    Matrice Copy(l, c + 1);
-    for (int i = 0; i < l; i++) {
-        for (int j = 0; j < c; j++) {
-            Copy[i][j] = M[i][j];
+    Matrice M1(M.getLines(), M.getColumns()+1);
+    for (int i = 0; i < M.getLines(); i++) {
+        for (int j = 0; j < M.getColumns(); j++) {
+            M1[i][j] = M[i][j];
         }
-        Copy[i][c] = v[i];
+        M1[i][M.getColumns()] = v[i];
     }
-    Copy.printM();
-
-    Matrice M1(Copy);
+    M1.printM();
     
-    for (int j = 0; j < M1.getLines() + 1; j++){
+    for (int j = 0; j < M1.getLines(); j++){
         std::cout << "next cycle" << std::endl; 
         if (M1[j].isNull()) {
-            M1.swapLines(j, l);
-            M1.popBack();      
+            M1.swapLines(j, M1.getLines()-1);
+            M1.printM();
+            M1.popBack();
+            M1.printM();
         } 
-        if (M1[j].isConjoint()) {
+        if (M1[j].isConjoint() == 0) {
             return a;
         }
         double maxElement = 0;
@@ -48,14 +46,14 @@ std::vector<Vector> GaussSolver::solve(const Matrice& M, const Vector& v) {
         for (int k = 0; k < j; k++) {
             M1[k] -= M1[j] * M1[k][j];
         }
-        for (int k = j+1; k < l; k++) {
+        for (int k = j+1; k < M1.getLines(); k++) {
             M1[k] -= M1[j] * M1[k][j];
         }
         M1.printM();        
     }
 
-    Vector res(l);
-    for (int i = 0; i < l; i++)
+    Vector res(M1.getLines());
+    for (int i = 0; i < M1.getLines(); i++)
         res[i] = M1[i][M.getColumns()];
     
     a.push_back(res);

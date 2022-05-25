@@ -7,5 +7,4 @@
 class GaussSolver {
 public:
 	std::vector<Vector> solve(const Matrice& A, const Vector& b);
-
 };

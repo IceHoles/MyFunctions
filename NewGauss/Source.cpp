@@ -60,10 +60,15 @@ int matrice_test() {
 
 int main() {
 	//matrice_test();
-	
-	int m = 4;
-	int n = 3;
-	
+	int m, n;
+
+	std::cout << "enter dimensions of the matrice ";
+	std::cin >> m >> n;
+	std::cout << std::endl;
+
+	// 4 3 0 0 0 8 7 3 -7 -4 -4 -6 5 -4 0 18 -11 -15  test with null line
+	// 3 3 8 7 3 -7 -4 -4 -6 5 -4 18 -11 -15	 test 
+
 	Matrice A(m, n);
 	
 	for (int i = 0; i < m; i++) {
@@ -83,7 +88,7 @@ int main() {
 	
 	std::vector<Vector> res = solver.solve(A, b);
 	
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < res.size(); i++) {
 		std::cout << res[i];
 	}
 }

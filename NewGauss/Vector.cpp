@@ -189,7 +189,7 @@ bool Vector::isNull()
 {
 	int ans = 1;
 	for (int i = 0; i < this->n; i++) {
-		if (abs(this->data[i]) < 1e-6)
+		if (abs(this->data[i]) > 1e-6)
 			ans = 0;
 	}
 	return ans;
@@ -203,10 +203,10 @@ bool Vector::isConjoint()
 			a = 1;
 		}
 	}
-	if (this->data[this->n] != 0 && a) {
-		return true;
+	if (this->data[this->n] != 0 && a == 0) {
+		return false;
 	}
-	return false;
+	return true;
 }
 
 double& Vector::operator[](int i) 
