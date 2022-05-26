@@ -77,7 +77,7 @@ std::vector<Vector> GaussSolver::solve(const Matrix& M, const Vector& v) {
         Matrix result(M1.getColumns() - M1.getLines() - 1, M1.getLines());
         for (int i = 0; i < result.getLines(); i++) {
             for (int j = 0; j < result.getColumns(); j++) {
-                result[i][j] = M1[j][M1.getColumns() - M1.getLines() + i - 1];
+                result[i][j] = -M1[j][M1.getColumns() - M1.getLines() + i - 1];
             }
             a.push_back(result[i]);
         }
