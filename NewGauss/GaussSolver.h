@@ -2,9 +2,9 @@
 #include <iostream>
 #include <vector>
 #include "Vector.h"
-#include "Matrice.h"
+#include "Matrix.h"
 
 class GaussSolver {
 public:
-	std::vector<Vector> solve(const Matrice& A, const Vector& b);
+	std::vector<Vector> solve(const Matrix& A, const Vector& b);
 };

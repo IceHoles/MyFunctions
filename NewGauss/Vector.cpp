@@ -199,11 +199,11 @@ bool Vector::isConjoint()
 {
 	bool a = 0;
 	for (int i = 0; i < this->n - 1; i++) {
-		if (this->data[i] != 0) {
+		if (abs(this->data[i]) > 1e-6) {
 			a = 1;
 		}
 	}
-	if (this->data[this->n] != 0 && a == 0) {
+	if (abs(this->data[this->n]) > 1e-6 && a == 0) {
 		return false;
 	}
 	return true;
