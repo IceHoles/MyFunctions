@@ -140,8 +140,16 @@ Matrix Matrix::operator*(const Matrix& m)
 	}
 }
 
-void Matrix::popBack(){
+void Matrix::popBackLine(){
 	this->l = this->l - 1;
+}
+
+void Matrix::popBackColumn()
+{
+	for (int i = 0; i < this->l; i++) {
+		this->data[i].popBack();
+	}
+	this->c = this->c - 1;
 }
 
 void Matrix::swapLines(int a, int b) {

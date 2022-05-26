@@ -23,15 +23,15 @@ std::vector<Vector> GaussSolver::solve(const Matrix& M, const Vector& v) {
     for (int j = 0; j < M1.getLines(); j++){
         if (M1[j].isNull()) {
             if (j == M1.getLines() - 1) {
-                M1.popBack();
-                //M1.printM();
+                M1.popBackLine();
+                M1.printM();
                 break;
             } 
             else {
                 M1.swapLines(j, M1.getLines() - 1);
                 //M1.printM();
-                M1.popBack();
-                //M1.printM();
+                M1.popBackLine();
+                M1.printM();
                 j--;
                 continue;
             }
@@ -49,23 +49,44 @@ std::vector<Vector> GaussSolver::solve(const Matrix& M, const Vector& v) {
             }
         }
         if (abs(maxElement) < eps) {
+            for (int i = 0; i < j; i++) {
+                if (abs(M1[i][j]) > abs(maxElement))
+                    maxElement = M1[i][j];
+            }
             M1.swapColumns(j, M1.getColumns() - 2);
+            if (abs(maxElement) < eps) {
+                M1.swapColumns(M1.getColumns() - 2, M1.getColumns() - 1);
+                M1.popBackColumn();
+            }
             j--;
             continue;
         }
+        
         M1.swapLines(j, line);
-        //M1.printM();
         M1[j] *= (1 / maxElement);                 
-        //M1.printM();
+        
         for (int k = 0; k < j; k++) {
             M1[k] -= M1[j] * M1[k][j];
         }
         for (int k = j+1; k < M1.getLines(); k++) {
             M1[k] -= M1[j] * M1[k][j];
         }
-        //M1.printM();        
+        M1.printM();
     }
 
+    for (int j = M1.getLines(); j < M1.getColumns()+1; j++) {
+        double maxElement = 0.0;
+        for (int i = 0; i < M1.getLines(); i++) {
+            if (abs(M1[i][j]) > abs(maxElement))
+                maxElement = M1[i][j];
+        }
+        if (abs(maxElement) < eps) {
+            M1.swapColumns(j, M1.getColumns() - 1); 
+            M1.popBackColumn();
+        }
+    }
+
+    M1.printM();
     Vector offset(M1.getLines());
     for (int i = 0; i < M1.getLines(); i++)
         offset[i] = M1[i][M.getColumns()];
@@ -75,12 +96,13 @@ std::vector<Vector> GaussSolver::solve(const Matrix& M, const Vector& v) {
     
     if (M1.getLines() != M1.getColumns() - 1) {
         Matrix result(M1.getColumns() - M1.getLines() - 1, M1.getLines());
-        for (int i = 0; i < result.getLines(); i++) {
+        for (int i = 0; i <result.getLines(); i++) {
             for (int j = 0; j < result.getColumns(); j++) {
-                result[i][j] = -M1[j][M1.getColumns() - M1.getLines() + i - 1];
+                result[i][j] = -M1[j][M1.getLines() + i];
             }
             a.push_back(result[i]);
         }
+        result.printM();
     }  
     return a;
 }

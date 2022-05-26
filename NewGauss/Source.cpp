@@ -68,6 +68,7 @@ int main() {
 	// 4 3 0 0 0 8 7 3 -7 -4 -4 -6 5 -4 0 18 -11 -15  test with null line
 	// 3 3 8 7 3 -7 -4 -4 -6 5 -4 18 -11 -15	 test 
 	// 3 4 4 -3 2 -1 3 -2 1 -3 5 -3 1 -8 8 7 1	  not conjoint sys
+	// 3 4 1 2 0 0 2 3 0 0 3 4 0 0 1 2 3
 
 	Matrix A(m, n);
 	for (int i = 0; i < m; i++) {

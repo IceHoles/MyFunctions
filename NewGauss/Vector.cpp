@@ -185,6 +185,11 @@ void Vector::print(int i)
 	std::cout << data[i] << std::endl;
 }
 
+void Vector::popBack()
+{
+	this->n = this->n - 1;
+}
+
 bool Vector::isNull()
 {
 	int ans = 1;

@@ -28,7 +28,8 @@ public:
 	friend std::ostream& operator<<(std::ostream& out, const Matrix& m);
 	friend std::istream& operator>>(std::istream& in, const Matrix& m);
 
-	void popBack();
+	void popBackLine();
+	void popBackColumn();
 	void swapLines(int a, int b);
 	void swapColumns(int a, int b);
 	void printM();

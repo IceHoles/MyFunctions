@@ -29,6 +29,7 @@ public:
 	int getSize() const;
 	void print();
 	void print(int i);
+	void popBack();
 	bool isNull();
 	bool isConjoint();
 	
