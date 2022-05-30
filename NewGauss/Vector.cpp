@@ -208,7 +208,7 @@ bool Vector::isConjoint()
 			a = 1;
 		}
 	}
-	if (abs(this->data[this->n]) > 1e-6 && a == 0) {
+	if (abs(this->data[this->n - 1]) > 1e-6 && a == 0) {
 		return false;
 	}
 	return true;
