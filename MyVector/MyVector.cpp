@@ -27,17 +27,16 @@ myVector::myVector(const myVector& v)
 
 void myVector::resize(int newSize) 
 {
-	int min = this->size < newSize ? this->size : newSize;
 	if (newSize < this->capacity) 
 	{
 		this->size = newSize;
 	}
 	else 
 	{
-		double* copy = new double[newSize];
-		for (int i = 0; i < min; i++)
+		double* copy = new double[constant * newSize];
+		for (int i = 0; i < this->size; i++)
 			copy[i] = data[i];
-		for (int i = min; i < newSize; i++) 
+		for (int i = this->size; i < newSize; i++)
 			copy[i] = 0;
 		delete[] this->data;
 		this->data = copy;
@@ -49,13 +48,9 @@ void myVector::resize(int newSize)
 myVector& myVector::operator=(const myVector& v) 
 {
 	if (this == &v) return *this;
-
-	delete[] this->data;
-	this->data = new double[v.size];
+	this->resize(v.size);
 	for (int i = 0; i < v.size; i++) 
 		this->data[i] = v.data[i];
-	this->size = v.size;
-	this->capacity = constant * size;
 	return *this;
 }
 
@@ -72,10 +67,15 @@ void myVector::pop_back()
 
 void myVector::erase(int a)
 {	
-	if (a < this->size)
+	if (a < this->size) {
 		this->resize(size - 1);
 		for (int i = a; i < size; i++)
 			this->data[i] = this->data[i + 1];
+	}
+	else {
+		for (int i = a; i < size; i++)
+			this->data[i] = this->data[i + 1];
+	}
 }
 
 void myVector::erase(int a, int b)
@@ -85,6 +85,9 @@ void myVector::erase(int a, int b)
 		this->resize(size + a - b - 1);
 		for (int i = a; i < b; i++)
 			this->data[i] = this->data[i + b + 1];
+	}
+	else {
+		this->resize(a);
 	}
 }
 
@@ -97,6 +100,7 @@ void myVector::insert(int i, double a)
 		}
 		this->data[i] = a;
 	}
+	else this->push_back(a);
 }
 
 double& myVector::operator[](int i)
